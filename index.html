@@ -2,12 +2,44 @@
 <html>
 <head>
 <title>Misfortune Cookie</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 <h1>Misfortune Cookie</h1>
-<div id="Cookie"></div>
+<div class="container">
+    <div class="fortune-cookie-container" onclick=""crackCookie(this)>
+        <div class="cookie cookie-whole"></div>
+        <div class="cookie cookie-left"></div>
+        <div class="cookie cookie-right"></div>
+    </div>
+    <div class="fortune-text" id="fortune"></div>
+</div>
 </body>
 <script>
+    const fortunes = [
+        "Life is roblox",
+        "Your cat will explode, tomorrow"
+    ]
+    let canCrack = true
+
+    function crackCookie(element) {
+        if (!canCrack) return;
+        canCrack = false
+        if (!element.classList.contains("cracked")) {
+            const fortuneCookieElement = document.getElementById("fortune")
+            const randomFortune = fortunes[Math.floor(Math.random()*fortunes.length)]
+            fortuneCookieElement.textContent = ""
+            let i = 0;
+            function typeWriter() {
+                if (i< randomFortune.length) {
+                    fortuneCookieElement.textContent += randomFortune.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 60)
+                }
+            }
+            setTimeout(typeWriter, 500)
+        }
+    }
 
 </script>
 </html>
